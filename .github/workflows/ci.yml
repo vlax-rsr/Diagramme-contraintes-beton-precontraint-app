@@ -27,6 +27,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # PySide6 charge ses bibliothèques graphiques via EGL/OpenGL : sans elles,
+      # l'import de QtWidgets échoue sur Linux (libEGL.so.1 introuvable).
+      - name: Bibliothèques graphiques Qt (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            libegl1 libgl1 libglib2.0-0 libdbus-1-3 \
+            libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 \
+            libxcb-keysyms1 libxcb-shape0 libfontconfig1
+
       - name: Installer Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
