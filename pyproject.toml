@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "beton-precontraint"
+description = "Diagrammes de contraintes d'une poutre en béton précontraint (PySide6)"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Riana STELLIA" }]
+keywords = ["béton précontraint", "contraintes", "précontrainte", "PySide6", "matplotlib"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: French",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+]
+requires-python = ">=3.11"
+dynamic = ["version"]
+dependencies = [
+    "PySide6>=6.5",
+    "matplotlib>=3.7",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "pytest-cov>=4.1", "ruff>=0.5"]
+
+[project.urls]
+Repository = "https://github.com/vlax-rsr/Diagramme-contraintes-beton-precontraint-app"
+Issues = "https://github.com/vlax-rsr/Diagramme-contraintes-beton-precontraint-app/issues"
+
+[project.scripts]
+beton-precontraint = "beton_precontraint.application:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "beton_precontraint.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 90
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF"]
+ignore = [
+    "RUF001",  # ambiguïté des guillemets français dans les commentaires
+    "RUF002",
+    "RUF003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Qt impose la casse de ses méthodes d'événement
+"src/beton_precontraint/presentation/vue_section.py" = ["N802"]

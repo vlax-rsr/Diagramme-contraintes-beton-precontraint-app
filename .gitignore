@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+
+# Environnements
+.venv/
+venv/
+env/
+
+# Tests et couverture
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Outils
+.mypy_cache/
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Sorties de l'application
+*.png
+!docs/**/*.png
